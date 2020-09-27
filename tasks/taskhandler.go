@@ -29,7 +29,7 @@ func Run(inp *TasksInput) []TaskOutput {
 	}()
 
 	for i, st := range *&inp.SequentialTasks {
-		log.Println("Task execution: set ", i)
+		log.Println("Task execution: concurrent tasks set ", i)
 		var cwg sync.WaitGroup
 		for _, t := range st.ConcurrentTasks {
 			cwg.Add(1)

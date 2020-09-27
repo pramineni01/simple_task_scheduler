@@ -30,6 +30,6 @@ func Execute() {
 	// print output
 	out := tasks.Run(&inpTasks)
 	for _, o := range out {
-		fmt.Printf("ID: %s\t Start: %s\t Complete: %s\n", o.ID, o.Start.Format(time.RFC822), o.End.Format(time.RFC822))
+		fmt.Printf("ID: %s\t Start: %s\t Complete: %s\n", o.ID, o.Start.Format(time.RFC1123), o.End.Format(time.RFC1123))
 	}
 }
