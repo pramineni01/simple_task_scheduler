@@ -1,9 +1,9 @@
 package tasks
 
 import (
-	"fmt"
 	"log"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -24,17 +24,20 @@ func Run(inp *TasksInput) []TaskOutput {
 			}
 			done <- true
 		}(done)
-	}
 
-	for _, st := range *&inp.SequentialTasks {
-		var cwg sync.Waitgroup
+		return done
+	}()
+
+	for i, st := range *&inp.SequentialTasks {
+		log.Println("Task execution: set ", i)
+		var cwg sync.WaitGroup
 		for _, t := range st.ConcurrentTasks {
 			cwg.Add(1)
 			go func(ID string, runFor int64) {
 				defer cwg.Done()
 				start := time.Now()
 				time.Sleep(time.Duration(runFor) * time.Second)
-				out <- &TaskOutput{ID: ct.ID, start, time.Now()}
+				chOut <- TaskOutput{ID, start, time.Now()}
 			}(t.ID, t.Runfor)
 		}
 
@@ -45,10 +48,6 @@ func Run(inp *TasksInput) []TaskOutput {
 	close(chOut)
 
 	<-done
-
-	// print output
-	for _, o := range out {
-		fmt.Println(o)
-	}
+	return out
 
 }

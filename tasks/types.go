@@ -1,5 +1,7 @@
 package tasks
 
+import "time"
+
 type TasksInput struct {
 	SequentialTasks []struct {
 		ConcurrentTasks []struct {
@@ -10,7 +12,7 @@ type TasksInput struct {
 }
 
 type TaskOutput struct {
-	ID    string `json:"id"`
-	Start string `json:"start_time"`
-	End   string `json:"completion_time"`
+	ID    string    `json:"id"`
+	Start time.Time `json:"start_time"`
+	End   time.Time `json:"completion_time"`
 }

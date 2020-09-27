@@ -2,11 +2,13 @@ package cmd
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"time"
 
-	"github.com/pramineni01/simple_task_handler/tasks"
+	"github.com/pramineni01/simple_task_scheduler/tasks"
 )
 
 func Execute() {
@@ -25,6 +27,9 @@ func Execute() {
 		os.Exit(1)
 	}
 
-	tasks.Run(inpTasks)
-
+	// print output
+	out := tasks.Run(&inpTasks)
+	for _, o := range out {
+		fmt.Printf("ID: %s\t Start: %s\t Complete: %s\n", o.ID, o.Start.Format(time.RFC822), o.End.Format(time.RFC822))
+	}
 }
