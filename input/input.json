@@ -1,0 +1,29 @@
+{
+    "sequential_tasks": [
+        {
+            "concurrent_tasks": [
+                {"id": "t1", "runfor": 2},
+                {"id": "t2", "runfor": 5},
+                {"id": "t3", "runfor": 3},
+                {"id": "t4", "runfor": 10}
+            ]
+        },
+        {
+            "concurrent_tasks": [
+                {"id": "t5", "runfor": 2},
+                {"id": "t6", "runfor": 4},
+                {"id": "t7", "runfor": 6}
+            ]
+        },
+        {
+            "concurrent_tasks": [
+                {"id": "t8", "runfor": 2}
+            ]
+        },
+        {
+            "concurrent_tasks": [
+                {"id": "t9", "runfor": 3}
+            ]
+        }
+    ]
+}
